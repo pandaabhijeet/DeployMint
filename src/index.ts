@@ -1,8 +1,10 @@
 import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
+import path from "path"
 import { generate } from "./generate";
 import simpleGit from "simple-git";
+import { getAllFiles } from "./getFiles";
 
 const app = express();
 app.use(cors())
@@ -13,15 +15,20 @@ app.post("/deploy", async (req,res) => {
     const repoUrl = req.body.repoUrl;
     console.log(repoUrl);
     const repoId = generate();
-    console.log("repoId= "+repoId);
 
-    await simpleGit().clone(repoUrl,`output/${repoId}`);
+    console.log(path.join( __dirname,`output/${repoId}`));
 
-    res.json({});
+    await simpleGit().clone(repoUrl, path.join( __dirname,`output/${repoId}`));
+
+    const getFiles = getAllFiles(path.join( __dirname,`output/${repoId}`));
+
+    console.log(getFiles);
+
+    res.json({
+        "repoId": repoId
+    });
 });
 
 app.listen(port,() => {
     console.log("App is running on port: "+ port);
 })
-
-//app.listen(3000);
