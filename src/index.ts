@@ -5,6 +5,7 @@ import path from "path"
 import { generate } from "./generate";
 import simpleGit from "simple-git";
 import { getAllFiles } from "./getFiles";
+import { uploadFile } from "./cloudUpload";
 
 const app = express();
 app.use(cors())
@@ -24,10 +25,16 @@ app.post("/deploy", async (req,res) => {
 
     console.log(getFiles);
 
+
+    const file = 'E:\\Web Dev Udemy\\DeployMint\\dist\\output\\lsie0v6iou\\src\\App.jsx';
+
+    await uploadFile(file.slice(__dirname.length + 1), file);
+
     res.json({
         "repoId": repoId
     });
 });
+
 
 app.listen(port,() => {
     console.log("App is running on port: "+ port);
