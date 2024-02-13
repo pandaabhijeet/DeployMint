@@ -23,12 +23,14 @@ app.post("/deploy", async (req,res) => {
 
     const getFiles = getAllFiles(path.join( __dirname,`output/${repoId}`));
 
-    console.log(getFiles);
+    //console.log(getFiles);
 
 
     try {
-        getFiles.forEach(async(file) =>{    
-            await uploadFile(file.slice(__dirname.length + 1), file);
+        getFiles.forEach(async(file) =>{
+            const pathWithSlash = file.slice(__dirname.length + 1).replace(/\\/g, '/');
+            console.log(pathWithSlash);    
+            await uploadFile(pathWithSlash, file);
             })
     } catch (error) {
         console.log(error);
