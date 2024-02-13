@@ -26,10 +26,14 @@ app.post("/deploy", async (req,res) => {
     console.log(getFiles);
 
 
-    const file = 'E:\\Web Dev Udemy\\DeployMint\\dist\\output\\lsie0v6iou\\src\\App.jsx';
-
-    await uploadFile(file.slice(__dirname.length + 1), file);
-
+    try {
+        getFiles.forEach(async(file) =>{    
+            await uploadFile(file.slice(__dirname.length + 1), file);
+            })
+    } catch (error) {
+        console.log(error);
+    }
+    
     res.json({
         "repoId": repoId
     });
