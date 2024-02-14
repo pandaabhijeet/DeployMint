@@ -6,11 +6,15 @@ import { generate } from "./generate";
 import simpleGit from "simple-git";
 import { getAllFiles } from "./getFiles";
 import { uploadFile } from "./cloudUpload";
+import { createClient } from "redis";
 
 const app = express();
 app.use(cors())
 const port = process.env.PORT || 5000;
 app.use(express.json());
+
+const publisher = createClient();
+publisher.connect();
 
 app.post("/deploy", async (req,res) => {
     const repoUrl = req.body.repoUrl;
@@ -26,15 +30,18 @@ app.post("/deploy", async (req,res) => {
     //console.log(getFiles);
 
 
-    try {
-        getFiles.forEach(async(file) =>{
-            const pathWithSlash = file.slice(__dirname.length + 1).replace(/\\/g, '/');
-            console.log(pathWithSlash);    
-            await uploadFile(pathWithSlash, file);
-            })
-    } catch (error) {
-        console.log(error);
-    }
+    // try {
+    //     getFiles.forEach(async(file) =>{
+    //         const pathWithSlash = file.slice(__dirname.length + 1).replace(/\\/g, '/');
+    //         console.log(pathWithSlash);    
+    //         await uploadFile(pathWithSlash, file);
+    //         })
+    // } catch (error) {
+    //     console.log(error);
+    // }
+
+    publisher.LPUSH("build_queue", repoId);
+    console.log("repository pushed to queue");
     
     res.json({
         "repoId": repoId
