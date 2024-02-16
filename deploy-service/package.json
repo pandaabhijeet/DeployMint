@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^20.11.19",
     "aws-sdk": "^2.1558.0",
+    "dotenv": "^16.4.4",
     "redis": "^4.6.13"
   }
 }

@@ -5,6 +5,7 @@ subscriber.connect();
 
 async function main() {
     while(true){
+        console.log("subscriber is listening now.");
         const response = await subscriber.brPop(
             commandOptions({isolated: true}),
             "build_queue",
