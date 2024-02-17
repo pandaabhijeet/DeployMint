@@ -12,11 +12,15 @@ const s3 = new S3({
 
 export async function downloadCloudFolder(prefix : string) {
 
+    console.log(`${process.env.ACCESS_KEY_ID}` + " " + `${process.env.SECRET_ACCESS_KEY}` + " " + `${process.env.ENDPOINT}`);
+
     const getAllFiles = await s3.listObjectsV2({
         Bucket :"deploymint",
         Prefix : prefix
     }).promise();
 
+    console.log("getAllFiles");
+    
     const allFilePromises = getAllFiles.Contents?.map(async ({Key}) => {
 
         return new Promise(async (resolve) => {
@@ -33,9 +37,11 @@ export async function downloadCloudFolder(prefix : string) {
                 fs.mkdirSync(dirName,{ recursive : true});
             }
 
+            console.log("dirName: " +dirName);
+
             s3.getObject({
                 Bucket : 'deploymint',
-                Key : Key
+                Key : Key || ""
             }).createReadStream().pipe(outputFile).on("finish",() => {
                 resolve("");
             })

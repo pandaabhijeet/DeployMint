@@ -30,15 +30,15 @@ app.post("/deploy", async (req,res) => {
     //console.log(getFiles);
 
 
-    // try {
-    //     getFiles.forEach(async(file) =>{
-    //         const pathWithSlash = file.slice(__dirname.length + 1).replace(/\\/g, '/');
-    //         console.log(pathWithSlash);    
-    //         await uploadFile(pathWithSlash, file);
-    //         })
-    // } catch (error) {
-    //     console.log(error);
-    // }
+    try {
+        getFiles.forEach(async(file) =>{
+            const pathWithSlash = file.slice(__dirname.length + 1).replace(/\\/g, '/');
+            console.log(pathWithSlash);    
+            await uploadFile(pathWithSlash, file);
+            })
+    } catch (error) {
+        console.log(error);
+    }
 
     publisher.LPUSH("build_queue", repoId);
     console.log("repository pushed to queue");

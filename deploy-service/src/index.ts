@@ -1,4 +1,5 @@
 import { createClient, commandOptions } from "redis"
+import { downloadCloudFolder } from "./cloudDownload";
 
 const subscriber = createClient();
 subscriber.connect();
@@ -12,6 +13,18 @@ async function main() {
             0
         );
         console.log(response);
+
+        const repoId = response?.element;
+
+        try{
+            const pathDown = `output/${repoId}`;
+            console.log(pathDown);
+            await downloadCloudFolder(`output/${repoId}`);
+            console.log("Repository downloaded.")
+        }catch(error){
+            console.log(error)
+        }
+        
     }
 }
 
