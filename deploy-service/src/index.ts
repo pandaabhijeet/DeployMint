@@ -1,5 +1,6 @@
 import { createClient, commandOptions } from "redis"
 import { downloadCloudFolder } from "./cloudDownload";
+import { buildProject } from "./buildProject";
 
 const subscriber = createClient();
 subscriber.connect();
@@ -17,10 +18,15 @@ async function main() {
         const repoId = response?.element;
 
         try{
-            const pathDown = `output/${repoId}`;
-            console.log(pathDown);
+
+            //download folder from cloud
             await downloadCloudFolder(`output/${repoId}`);
-            console.log("Repository downloaded.")
+            console.log("Repository downloaded.");
+
+            //build the project (npm run build)
+            repoId && await buildProject(repoId);
+            console.log("Build complete.");
+
         }catch(error){
             console.log(error)
         }
