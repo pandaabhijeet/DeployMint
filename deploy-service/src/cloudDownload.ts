@@ -54,5 +54,54 @@ export async function downloadCloudFolder(prefix : string) {
     
 } 
 
+export async function uploadDistFolder(repoId : string){
+    const folderPath = path.join(__dirname, `output/${repoId}/dist`);
+    const files = getAllFiles(folderPath);
+
+    files.forEach((file)=>{
+        uploadFile(`dist/${repoId}/` + file.slice(folderPath.length + 1), file);
+    });
+
+}
+
+ const getAllFiles  = (folderPath : string) => {
+
+    let allFiles : string[] = [] ;
+
+    const allFilesAndFolders = fs.readdirSync(folderPath);
+
+    allFilesAndFolders.forEach((file) => {
+        const fullFilePath = path.join(folderPath,file);
+
+        if(fs.statSync(fullFilePath).isDirectory()){
+            allFiles = allFiles.concat(getAllFiles(fullFilePath));
+        }else{
+            allFiles.push(fullFilePath);
+        }
+    })
+
+    return allFiles;
+}
+
+
+const uploadFile = async (filename:string, localFilePath:string) => {
+    const fileContent = fs.readFileSync(localFilePath);
+
+    try {
+
+        const uploadRes =  await s3.upload({
+            Body : fileContent,
+            Bucket : "deploymint",
+            Key : filename,
+        }).promise();
+    
+        console.log(uploadRes);
+
+    } catch (error) {
+        console.log(error);
+    }
+    
+}
+
 
 

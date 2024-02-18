@@ -1,9 +1,12 @@
 import { createClient, commandOptions } from "redis"
-import { downloadCloudFolder } from "./cloudDownload";
+import { downloadCloudFolder, uploadDistFolder } from "./cloudDownload";
 import { buildProject } from "./buildProject";
 
 const subscriber = createClient();
 subscriber.connect();
+
+const publisher = createClient();
+publisher.connect();
 
 async function main() {
     while(true){
@@ -30,6 +33,13 @@ async function main() {
         }catch(error){
             console.log(error)
         }
+
+        //uploading the final dist folder to cloud
+
+        repoId && await uploadDistFolder(repoId);
+        console.log("Uploading final dist folder complete.");
+
+        repoId && publisher.hSet("status", repoId, "deployed");
         
     }
 }
