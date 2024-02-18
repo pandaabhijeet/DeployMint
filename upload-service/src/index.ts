@@ -9,7 +9,7 @@ import { uploadFile } from "./cloudUpload";
 import { createClient } from "redis";
 
 const app = express();
-app.use(cors())
+app.use(cors());
 const port = process.env.PORT || 5000;
 app.use(express.json());
 
