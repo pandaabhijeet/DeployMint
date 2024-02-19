@@ -55,11 +55,12 @@ export async function downloadCloudFolder(prefix : string) {
 } 
 
 export async function uploadDistFolder(repoId : string){
-    const folderPath = path.join(__dirname, `output/${repoId}/dist`);
+    const folderPath = path.join(__dirname, `output/${repoId}/dist`).replace(/\\/g, '/');
+    console.log(folderPath);
     const files = getAllFiles(folderPath);
 
     files.forEach((file)=>{
-        uploadFile(`dist/${repoId}/` + file.slice(folderPath.length + 1), file);
+        uploadFile(`dist/${repoId}/` + file.slice(folderPath.length + 1).replace(/\\/g, '/'), file);
     });
 
 }
