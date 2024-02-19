@@ -15,6 +15,8 @@ app.use(express.json());
 
 const publisher = createClient();
 publisher.connect();
+const subscriber = createClient();
+subscriber.connect();
 
 app.post("/deploy", async (req,res) => {
     const repoUrl = req.body.repoUrl;
@@ -41,12 +43,23 @@ app.post("/deploy", async (req,res) => {
     }
 
     publisher.LPUSH("build_queue", repoId);
+    publisher.hSet("status",repoId,"uploaded");
+
     console.log("repository pushed to queue");
     
     res.json({
         "repoId": repoId
     });
 });
+
+app.get("/status", async (req,res) => {
+    const repoId = req.query.id;
+    const status = await subscriber.hGet("status", repoId as string);
+
+    res.json({
+        status : status
+    });
+})
 
 
 app.listen(port,() => {
