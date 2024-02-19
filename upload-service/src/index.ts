@@ -53,12 +53,16 @@ app.post("/deploy", async (req,res) => {
 });
 
 app.get("/status", async (req,res) => {
+
+    console.log("getting status for :");
     const repoId = req.query.id;
+    console.log(repoId);
     const status = await subscriber.hGet("status", repoId as string);
 
     res.json({
         status : status
     });
+    console.log("status: " + status);
 })
 
 
