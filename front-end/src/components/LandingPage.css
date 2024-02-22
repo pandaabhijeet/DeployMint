@@ -7,18 +7,19 @@
   border-radius: 5px;
   margin: 0 auto;
   padding: 20px 30px;
+  align-content: center;
 }
 
 .wrapper h1 {
   font-size: 36px;
   text-align: center;
-  color: black;
+  color: rgb(7, 8, 112);
 }
 
 .wrapper h2 {
   font-size: 16px;
   text-align: center;
-  color: black;
+  color: rgb(7, 8, 112);
 }
 
 .input-box {
@@ -26,13 +27,13 @@
   margin-top: 20px;
   width: 420px;
   border-radius: 3px;
-  background-color: black;
+  background-color: rgb(7, 8, 112);
 }
 
 input {
   width: calc(100% - 40px);
   height: 100%;
-  border: 1px solid black;
+  border: 1px transparent;
   outline: none;
   font-size: 13px;
   color: white;
@@ -53,7 +54,7 @@ input {
   font-size: 18px;
 }
 
-.deploy-btn {  
+.deploy-btn {
   display: inline-block;
   margin-top: 20px;
   border: none;
@@ -62,5 +63,5 @@ input {
   margin-bottom: 10px;
   text-align: center;
   line-height: 20px;
-  background: black;
+  background: rgb(7, 8, 112);
 }
