@@ -9,9 +9,10 @@ function LandingPage() {
   const [repoUrl, setRepoUrl] = useState("");
   const [uploadId, setUploadId] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [deploying, setDeployed] = useState(false);
+  const [deployed, setDeployed] = useState(false);
 
   return (
+    <>
     <div className="wrapper">
       <form action="">
         <h1>Deploymint</h1>
@@ -54,6 +55,21 @@ function LandingPage() {
         </button>
       </form>
     </div>
+    {true && 
+    <div className="status-card">
+      <h2>Your application has been successfully deployed!</h2>
+      <div className="url-box">
+        <h3>Deployed URL</h3>
+        <input id="deployed-url" readOnly type="url" value={`http://${uploadId}.deploymint.com:3001/index.html`}/>
+      </div>
+
+      <button className="visit-btn">
+        <a href={`http://${uploadId}.deploymint.com:3001/index.html`}>
+          Visit Application
+        </a>
+      </button>
+    </div>}
+    </>
   );
 }
 

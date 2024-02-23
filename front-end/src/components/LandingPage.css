@@ -7,6 +7,7 @@
   border-radius: 5px;
   margin: 0 auto;
   padding: 20px 30px;
+  margin-bottom: 10px;
   align-content: center;
 }
 
@@ -67,4 +68,58 @@ input {
   text-align: center;
   border-radius:3px;
   background: rgb(7, 8, 112);
+}
+
+.status-card{
+  width: 420px;
+  height: max-content;
+  background: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 30px;
+  align-content: center;
+}
+
+.status-card h2{
+  font-size: 16px;
+  color: green;
+}
+
+.url-box{
+  text-align: center;
+}
+
+.url-box h3{
+  font-size: 13px;
+  color: rgb(7, 8, 112);
+}
+
+.url-box input{
+  font-size: 13px;
+  color: white;
+  width: 100%;
+  text-align: center;
+  background: rgb(7, 8, 112);
+  border-radius: 3px;
+}
+
+.visit-btn{
+  display: inline-block;
+  margin-top: 20px;
+  border: none;
+  width: 150px;
+  height: 30px;
+  font-size: 14px;
+  line-height: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-radius:3px;
+  background: rgb(7, 8, 112);
+}
+
+.visit-btn a{
+  color: white;
+  text-decoration: none;
 }
