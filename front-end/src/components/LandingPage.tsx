@@ -55,7 +55,7 @@ function LandingPage() {
         </button>
       </form>
     </div>
-    {true && 
+    {deployed && 
     <div className="status-card">
       <h2>Your application has been successfully deployed!</h2>
       <div className="url-box">
