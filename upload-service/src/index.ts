@@ -33,19 +33,20 @@ app.post("/deploy", async (req,res) => {
 
 
     try {
-        getFiles.forEach(async(file) =>{
+         await Promise.all(getFiles.map(async(file) =>{
             const pathWithSlash = file.slice(__dirname.length + 1).replace(/\\/g, '/');
             console.log(pathWithSlash);    
             await uploadFile(pathWithSlash, file);
-            })
+            }));
+
+            publisher.LPUSH("build_queue", repoId);
+            publisher.hSet("status",repoId,"uploaded");
+
+            console.log("repository pushed to queue");
+            
     } catch (error) {
         console.log(error);
     }
-
-    publisher.LPUSH("build_queue", repoId);
-    publisher.hSet("status",repoId,"uploaded");
-
-    console.log("repository pushed to queue");
     
     res.json({
         "repoId": repoId
