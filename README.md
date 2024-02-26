@@ -1,13 +1,13 @@
-This is an application tha t allows you to deploy your GitHub reporsitory with a single click.
+**This is an application that allows you to deploy your GitHub repository with a single click.**
 
-#### -- STEPS TO START AND DEPLOY --####
+**#### -- STEPS TO START AND DEPLOY --####**
 
-Note : You need to have Redis loacally installed in your machine to be able to run this code.
+Note : You need to have **Redis** loacally installed in your machine to be able to run this code.
 
 1. Fork the repository or download the code package and open it in your code editor
 2. There are four services each independent of the other that can be run deparately. Run each of them as below :
 
-   a) Start the Redis server locally with command - "sudo service redis-server start". You can take help from here : https://redis.io/docs/get-started/data-store/
+   a) Start the Redis server locally with command - **"sudo service redis-server start"**. You can take help from here : https://redis.io/docs/get-started/data-store/
    b) In your editor terminal cd to the upload service :
       - cd /[your local path]/upload-service
       - install all required dependencies with : "npm install"
@@ -36,7 +36,7 @@ Note : You need to have Redis loacally installed in your machine to be able to r
 
     ![image](https://github.com/pandaabhijeet/DeployMint/assets/37467013/16b48411-be31-4f5c-91c1-475bc34b686c)
 
-5. Once your repository is deployed, you will see a card showing the deployed URL with confirmation of deployement. You can simply click on the "Visit Application" button
+5. Once your repository is deployed, you will see a card showing the deployed URL with confirmation of deployement. You can simply click on the **"Visit Application"** button
    or copy and paste the URL provided in the card in a new tab in your browser.
 
    ![image](https://github.com/pandaabhijeet/DeployMint/assets/37467013/c4a2fb52-6e22-49ff-9174-49d3c0d6a758)
